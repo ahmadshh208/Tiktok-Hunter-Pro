@@ -1,17 +1,28 @@
-# 🛡️ Ahmed Ultimate TikTok OSINT v3.0
+# 🛡️ Ahmed-TikTok-Ultra-V6
 
-![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge&logo=github)
+<p align="center">
+  <img src="Ahmed.jpg" width="500" title="Ahmed TikTok Tool Preview">
+</p>
 
-An advanced OSINT (Open Source Intelligence) tool designed by **AHMED** to extract deep information from TikTok profiles using only the username. 
+## 🚀 عن الأداة
+أداة متطورة لجمع المعلومات (OSINT) من حسابات تيك توك، تم تطويرها بواسطة **المطور أحمد**. الأداة تسحب البيانات العميقة التي لا تظهر في التطبيق العادي.
 
-## 🚀 Features
-- 🆔 **User ID Discovery**: Find the hidden unique ID of any user.
-- 📅 **Creation Date**: Reveal when the account was approximately created.
-- 🌍 **Region Detection**: Identify the country/region of the account.
-- 📧 **Email Hunter**: Automatically scrape public emails from bios and metadata.
-- 🖼️ **HD Avatar Downloader**: Download the profile picture in its original high quality.
-- 🔗 **Social Link Detector**: Find linked Instagram, YouTube, and Twitter accounts.
+## ✨ المميزات (Features)
+- 🆔 **User ID**: استخراج الرقم التعريفي الفريد للحساب.
+- 📅 **Creation Date**: كشف تاريخ إنشاء الحساب بدقة.
+- 📊 **Full Stats**: جلب عدد المتابعين، الإعجابات، والفيديوهات.
+- 🌍 **Region**: تحديد الدولة أو الإقليم المسجل به الحساب.
+- 📧 **Email Hunter**: البحث عن رسائل البريد الإلكتروني العامة.
+- 🔒 **Privacy Check**: معرفة ما إذا كان الحساب خاصاً أم عاماً.
+
+## 🛠️ طريقة التثبيت (Installation)
+افتح **Termux** أو أي نظام برمي وضع الأوامر التالية:
+
+```bash
+git clone https://github.com/jowner526202-hash/Tiktok-Hunter-Pro.git
+cd Tiktok-Hunter-Pro
+pip install requests
+python ahmed_ultra_scan.py
 - 📂 **Auto-Reporting**: Saves all findings in a structured JSON report.
 
 ## 🛠️ Installation & Usage
