@@ -18,5 +18,6 @@ An advanced OSINT (Open Source Intelligence) tool designed by **AHMED** to extra
 
 ### 1. Clone the repository
 ```bash
-git clone [https://github.com/YOUR_GITHUB_USERNAME/Tiktok-Hunter-Pro.git](https://github.com/YOUR_GITHUB_USERNAME/Tiktok-Hunter-Pro.git)
+git clone https://github.com/jowner526202-hash/Tiktok-Hunter-Pro.git
 cd Tiktok-Hunter-Pro
+python ahmed_ultimate_osint.py
