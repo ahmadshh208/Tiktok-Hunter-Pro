@@ -14,26 +14,104 @@ def banner():
     ██╔══██║██╔══██║██║╚██╔╝██║██╔══╝  ██║  ██║
     ██║  ██║██║  ██║██║ ╚═╝ ██║███████╗██████╔╝
     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═════╝
-    \033[1;33m [!] TITAN EDITION v4.0 | Developed by: AHMED \033[0m
+    \033[1;36m [!] ULTRA EDITION v6.0 | DEVELOPER: AHMED \033[0m
     """)
 
-def get_data(username):
+def get_creation_date(uid):
+    try:
+        # تقنية تحويل الـ ID إلى تاريخ إنشاء
+        binary = bin(int(uid))
+        timestamp = int(binary[2:33], 2)
+        return datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d')
+    except:
+        return "Unknown"
+
+def ahmed_ultra_scan(username):
     username = username.replace('@', '').lower()
     url = f"https://www.tiktok.com/@{username}"
     
-    # قائمة رؤوس متغيرة لتجنب كشف البوت
+    # محاكاة متصفح حقيقي لتجنب الحظر
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
-        'Accept-Language': 'en-US,en;q=0.5',
-        'Connection': 'keep-alive',
+        'Accept-Language': 'ar,en-US;q=0.7,en;q=0.3',
+        'Referer': 'https://www.google.com/',
     }
 
-    print(f"[*] Ahmed's Engine is Deep Scanning: @{username}...")
+    print(f"\033[1;33m[*] Ahmed's Engine is Scanning: @{username}...\033[0m")
     
     try:
-        session = requests.Session()
-        res = session.get(url, headers=headers, timeout=15)
+        res = requests.get(url, headers=headers, timeout=20)
+        if res.status_code == 200:
+            html = res.text
+            
+            # 1. استخراج الـ ID (أنماط متعددة لضمان الظهور)
+            uid = "Unknown"
+            patterns = [r'\"userId\":\"(\d+)\"', r'\"authorId\":\"(\d+)\"', r'\"id\":\"(\d+)\"']
+            for p in patterns:
+                match = re.search(p, html)
+                if match:
+                    uid = match.group(1)
+                    break
+            
+            # 2. استخراج الإحصائيات (المتابعين، الإعجابات، الخ)
+            def find_stat(pattern, text):
+                match = re.search(pattern, text)
+                return match.group(1) if match else "0"
+
+            followers = find_stat(r'\"followerCount\":(\d+)', html)
+            following = find_stat(r'\"followingCount\":(\d+)', html)
+            hearts = find_stat(r'\"heartCount\":(\d+)', html)
+            videos = find_stat(r'\"videoCount\":(\d+)', html)
+            
+            # 3. المنطقة والخصوصية
+            reg_match = re.search(r'\"region\":\"([A-Z]{2})\"', html)
+            region = reg_match.group(1) if reg_match else "N/A"
+            is_private = "privateAccount\":true" in html
+            
+            # 4. تاريخ الإنشاء
+            c_date = get_creation_date(uid) if uid.isdigit() else "N/A"
+            
+            # 5. صيد الإيميلات
+            emails = list(set(re.findall(r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}', html)))
+
+            # --- عرض النتائج النهائية بشكل أسطوري ---
+            print(f"\n\033[1;32m[✔] FULL DATA CAPTURED BY AHMED:\033[0m")
+            print(f"\033[1;37m" + "━"*50 + "\033[0m")
+            print(f"\033[1;37m👤 Profile:    \033[1;34m@{username}\033[0m")
+            print(f"\033[1;37m🆔 User ID:    \033[1;31m{uid}\033[0m")
+            print(f"\033[1;37m📅 Created:    \033[1;36m{c_date}\033[0m")
+            print(f"\033[1;37m🌍 Region:     \033[1;36m{region}\033[0m")
+            print(f"\033[1;37m🔒 Private:    \033[1;33m{'Yes' if is_private else 'No'}\033[0m")
+            print(f"\033[1;37m" + "━"*20 + " STATS " + "━"*20 + "\033[0m")
+            print(f"\033[1;32m👥 Followers:  {followers}\033[0m")
+            print(f"\033[1;32m👤 Following:  {following}\033[0m")
+            print(f"\033[1;32m❤️ Total Likes: {hearts}\033[0m")
+            print(f"\033[1;32m🎥 Videos:      {videos}\033[0m")
+            print(f"\033[1;37m" + "━"*20 + " CONTACT " + "━"*19 + "\033[0m")
+            print(f"\033[1;33m📧 Emails:     {', '.join(emails) if emails else 'None Found'}\033[0m")
+            print(f"\033[1;37m" + "━"*50 + "\033[0m")
+
+            # حفظ التقرير باسم المطور أحمد
+            report = {
+                "developer": "AHMED",
+                "target": username,
+                "stats": {"followers": followers, "likes": hearts, "videos": videos},
+                "info": {"id": uid, "created": c_date, "region": region}
+            }
+            with open(f"ahmed_report_{username}.json", "w") as f:
+                json.dump(report, f, indent=4)
+            print(f"\033[1;30m[Report saved: ahmed_report_{username}.json]\033[0m\n")
+
+        else:
+            print(f"\033[1;31m[-] TikTok blocked the request. Code: {res.status_code}\033[0m")
+    except Exception as e:
+        print(f"\033[1;31m[-] Error: {e}\033[0m")
+
+if __name__ == "__main__":
+    banner()
+    inp = input("\033[1;37mEnter TikTok Username: \033[0m")
+    ahmed_ultra_scan(inp)
         
         if res.status_code == 200:
             html = res.text
