@@ -1,7 +1,7 @@
 # 🛡️ Ahmed-TikTok-Ultra-V6
 
 <p align="center">
-  <img src="ahmed.jpg" width="500" title="Ahmed TikTok Tool Preview">
+  <img src="IMG_20260209_133555_226.webp" width="500" title="Ahmed TikTok Tool Preview">
 </p>
 
 ## 🚀 عن الأداة
